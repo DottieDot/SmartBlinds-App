@@ -1,5 +1,5 @@
 
-export default (state = [], action) => {
+export default (state = [], action: any) => {
   switch (action.type) {
     case 'ADD_HOME':
       return [
