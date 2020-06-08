@@ -1,7 +1,7 @@
-import { IUser } from "../model";
+import { User } from "../model";
 import { SET_LOGGED_IN, SET_LOGGED_OUT } from "../reducers/auth";
 
-export const SetLoggedIn = (user: IUser) => ({ 
+export const SetLoggedIn = (user: User) => ({ 
   type: SET_LOGGED_IN,
   user,
 })

@@ -24,7 +24,7 @@ export default () => {
     if (result) {
       const user = await api.GetUser()
 
-      if (user != null) {
+      if (user) {
         dispatch(SetLoggedIn(user))
       }
       else {

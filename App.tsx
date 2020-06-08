@@ -18,13 +18,12 @@ const AppRoot = () => {
   useEffect(() => {
     SplashScreen.preventAutoHideAsync()
     const fn = async () => {
-      let success = false
       const res = await OAuth2.LoadCredentials()
 
       if (res) {
         const user = await api.GetUser()
 
-        if (user !== null) {
+        if (user) {
           dispatch(SetLoggedIn(user))
         }
       }

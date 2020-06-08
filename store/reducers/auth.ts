@@ -1,14 +1,14 @@
-import { IAuth } from "../model"
+import { Auth } from "../model"
 
 export const SET_LOGGED_IN = 'SET_LOGGED_IN'
 export const SET_LOGGED_OUT = 'SET_LOGGED_OUT'
 
-const initialState: IAuth = {
+const initialState: Auth = {
   loggedIn: false,
   user: null,
 }
 
-export default (state = initialState, action: any): IAuth => {
+export default (state = initialState, action: any): Auth => {
   switch (action.type) {
     case SET_LOGGED_IN:
       return {

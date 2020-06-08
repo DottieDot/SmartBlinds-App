@@ -1,3 +1,5 @@
 
-export { default as IUser } from './IUser'
-export { default as IAuth } from './IAuth'
+export { default as User } from './User'
+export { default as Auth } from './Auth'
+export { default as Home } from './Home'
+export { default as Room } from './Room'

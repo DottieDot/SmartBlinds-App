@@ -1,5 +1,9 @@
+import { Home } from '../model'
 
-export default (state = [], action: any) => {
+export const ADD_HOME = 'ADD_HOME'
+export const SET_HOMES = 'SET_HOMES'
+
+export default (state: Home[] = [], action: any) => {
   switch (action.type) {
     case 'ADD_HOME':
       return [

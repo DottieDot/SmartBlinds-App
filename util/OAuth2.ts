@@ -2,6 +2,7 @@ import config from '../env.json'
 import OAuth2Credentials from './OAuth2Credentials'
 import moment from 'moment'
 import { AsyncStorage } from 'react-native'
+import Server from '../api/Server'
 
 export default class OAuth2 {
   static _credentials: OAuth2Credentials  
@@ -34,7 +35,7 @@ export default class OAuth2 {
 
   static async Authenticate(email: string, password: string) {
     try {
-      const response = await fetch(`${config.server}${config.oauth2.endpoint}`, {
+      const response = await fetch(`${Server}${config.oauth2.endpoint}`, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -65,7 +66,7 @@ export default class OAuth2 {
   }
 
   static async Request(path: string, init?: RequestInit) {
-    return fetch(`${config.server}${path}`, {
+    return fetch(`${Server}${path}`, {
       ...init,
       headers: {
         ...init?.headers,

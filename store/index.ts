@@ -1,12 +1,17 @@
 import reducers from './reducers'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
-import { IAuth } from './model'
+import { Auth, Home } from './model'
+import thunk from 'redux-thunk'
 
-interface IRootState {
-  auth: IAuth
+interface RootState {
+  auth: Auth,
+  homes: Home[]
 }
 
-export const useTypedSelector: TypedUseSelectorHook<IRootState> = useSelector
+export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export default createStore(reducers)
+export default createStore(
+  reducers,
+  applyMiddleware(thunk)
+)
