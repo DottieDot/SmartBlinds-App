@@ -1,6 +1,8 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import * as screens from '../screens'
+import Welcome from './Welcome'
+import Login from './Login'
+import Register from './Register'
 
 const stack = createStackNavigator()
 
@@ -8,16 +10,16 @@ export default () => (
   <stack.Navigator initialRouteName="welcome">
     <stack.Screen 
       name="welcome" 
-      component={screens.Welcome} 
+      component={Welcome} 
       options={{ header: () => null }} 
     />
     <stack.Screen 
       name="login" 
-      component={screens.Login} 
+      component={Login} 
     />
     <stack.Screen 
       name="register" 
-      component={screens.Register} 
+      component={Register} 
     />
   </stack.Navigator>
 )

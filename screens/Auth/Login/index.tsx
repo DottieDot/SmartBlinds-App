@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { View } from 'react-native'
 import style from './style'
 import { Text, TextInput, Button } from 'react-native-paper'
-import OAuth2 from '../../util/OAuth2'
-import { useNavigation } from '@react-navigation/native'
-import { SetLoggedIn } from '../../store/actions/auth'
+import OAuth2 from '../../../util/OAuth2'
+import { SetLoggedIn } from '../../../store/actions/auth'
 import { useDispatch } from 'react-redux'
-import * as api from '../../api'
+import * as api from '../../../api'
 
 export default () => {
   const [submitting, setSubmitting] = useState(false)

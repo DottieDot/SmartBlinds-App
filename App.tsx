@@ -10,6 +10,7 @@ import OAuth2 from './util/OAuth2';
 import * as api from './api'
 import { SetLoggedIn } from './store/actions/auth';
 import * as SplashScreen from 'expo-splash-screen';
+import * as screens from './screens'
 
 const AppRoot = () => {
   const auth = useTypedSelector(state => state.auth)
@@ -38,7 +39,7 @@ const AppRoot = () => {
       {auth.loggedIn ? (
         <navigators.BottomTabs />
       ) : (
-        <navigators.AuthStack />
+        <screens.Auth />
       )}
     </React.Fragment>
   )

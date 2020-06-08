@@ -6,7 +6,6 @@ export default async (): Promise<User | null> => {
   try {
     const { user } = await OAuth2.Request('/api/user').then(res => res.json())
 
-    console.log(user)
     return user || null
   }
   catch (e) {
