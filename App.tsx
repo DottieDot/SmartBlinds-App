@@ -11,6 +11,7 @@ import * as api from './api'
 import { SetLoggedIn } from './store/actions/auth';
 import * as SplashScreen from 'expo-splash-screen';
 import * as screens from './screens'
+import { loadHomes } from './store/actions/homes';
 
 const AppRoot = () => {
   const auth = useTypedSelector(state => state.auth)
@@ -26,6 +27,7 @@ const AppRoot = () => {
 
         if (user) {
           dispatch(SetLoggedIn(user))
+          dispatch(loadHomes())
         }
       }
       

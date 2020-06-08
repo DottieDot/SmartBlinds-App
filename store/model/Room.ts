@@ -1,6 +1,6 @@
 
 export default interface Room {
   id: number
-  name: String
+  name: string
   state: number
 }

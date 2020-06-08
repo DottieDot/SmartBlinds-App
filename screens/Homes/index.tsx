@@ -10,7 +10,7 @@ export default () => (
     <stack.Screen 
       name="homes" 
       component={Homes} 
-      options={{ header: () => null }} 
+      options={{ header: () => null }}
     />
   </stack.Navigator>
 )

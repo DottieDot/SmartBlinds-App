@@ -11,9 +11,7 @@ export default (state: Home[] = [], action: any) => {
         action.home
       ]
     case 'SET_HOMES':
-      return [
-        action.homes
-      ]
+      return action.homes
     default:
       return state;
   }
