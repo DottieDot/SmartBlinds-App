@@ -17,6 +17,7 @@ export default () => {
   useEffect(() => {
     setSections(homes.map((dat) => ({
       title: dat.name,
+      id: dat.id,
       data: dat.rooms,
     })))
   }, [homes])
@@ -27,7 +28,7 @@ export default () => {
         style={style.list}
         sections={sections}
         keyExtractor={({ id }) => id}
-        renderItem={({ item: { id, name, state } }) => (
+        renderItem={({ item: { id, name, state }, section }) => (
           <Room
             name={name}
             icon="blank"
@@ -39,7 +40,8 @@ export default () => {
             }
             onPress={() => {
               navigate('room', {
-                id: id
+                id: id,
+                homeId: section.id,
               })
             }}
           />

@@ -4,7 +4,7 @@ import { TypedUseSelectorHook, useSelector } from 'react-redux'
 import { Auth, Home } from './model'
 import thunk from 'redux-thunk'
 
-interface RootState {
+export interface RootState {
   auth: Auth,
   homes: Home[]
 }
