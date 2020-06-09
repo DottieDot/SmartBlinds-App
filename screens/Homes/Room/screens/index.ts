@@ -1,2 +1,3 @@
 
-export { default as State } from './state'
+export { default as State    } from './State'
+export { default as Settings } from './Settings'
