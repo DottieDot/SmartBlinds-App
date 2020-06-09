@@ -2,7 +2,7 @@ import OAuth2 from "../util/OAuth2"
 import { User, Home } from "../store/model"
 
 
-export default async (): Promise<Home[] | null> => {
+export default async (): Promise<any[]> => {
   try {
     const { data } = await OAuth2.Request('/api/homes').then(res => res.json())
 

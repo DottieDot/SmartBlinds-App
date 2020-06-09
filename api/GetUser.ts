@@ -9,7 +9,6 @@ export default async (): Promise<User | null> => {
     return user || null
   }
   catch (e) {
-    console.log(e)
     return null
   }
 }

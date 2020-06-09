@@ -17,7 +17,7 @@ const Placeholder = () => {
 }
 
 export default ({ route }: Props) => {
-  const room = useTypedSelector(roomSelector(route.params.id, route.params.homeId))
+  const room = useTypedSelector(roomSelector(route.params.room))
 
   return (
     <Tab.Navigator backBehavior="none">

@@ -4,8 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 type HomesStackParamList = {
   homes: undefined
   room: {
-    id: number
-    homeId: number
+    room: number
   }
 }
 

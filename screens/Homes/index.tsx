@@ -11,7 +11,7 @@ const Stack = createStackNavigator()
 
 const RoomHeader = (props: StackHeaderTitleProps) => {
   const params = useNavigationState(state => state.routes[state.index].params) as RoomScreenRouteProp['params']
-  const room = useTypedSelector(roomSelector(params?.id, params?.homeId))
+  const room = useTypedSelector(roomSelector(params?.room))
 
   return (
     <HeaderTitle {...props}>{room?.name}</HeaderTitle>
