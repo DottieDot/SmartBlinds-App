@@ -21,9 +21,14 @@ const Item = ({ id }: { id: number }) => {
       icon="blank"
       style={style.room}
       trailing={
-        <Switch  
+        <Switch
           value={state < .95}
           onValueChange={(value) => dispatch(setRoomState(id, value ? 0 : 1))}
+          style={{
+            transform: [{
+              rotate: '-90deg'
+            }]
+          }}
         />
       }
       onPress={() => {
@@ -41,7 +46,6 @@ const Item = ({ id }: { id: number }) => {
 export default () => {
   const homes = useTypedSelector(state => state.homes)
   const [sections, setSections] = useState<SectionListData<number>[]>([])
-  
 
   useEffect(() => {
     setSections(Object.values(homes).map((dat) => ({
