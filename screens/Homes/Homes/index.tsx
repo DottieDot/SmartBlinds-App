@@ -26,9 +26,12 @@ const Item = ({ id }: { id: number }) => {
         />
       }
       onPress={() => {
-        navigate('room', {
-          room: id,
-        })
+        // Make app feel more responsive
+        setTimeout(() => {
+          navigate('room', {
+            room: id,
+          })
+        }, 0)
       }}
     />
   )
