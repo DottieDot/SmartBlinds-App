@@ -2,16 +2,16 @@ import React, { useState, ReactNode, useEffect } from 'react'
 import { Room } from '../../../components'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useTypedSelector, RootState } from '../../../store'
-import { FlatList } from 'react-native-gesture-handler'
-import { Switch, Text } from 'react-native-paper'
-import { SectionList, SectionListData, SectionListRenderItemInfo, View } from 'react-native'
-import * as model from '../../../store/model'
+import { Switch, Caption } from 'react-native-paper'
+import { SectionList, SectionListData } from 'react-native'
 import style from './style'
 import { useNavigation } from '@react-navigation/native'
 import { HomesStackNavigation } from '../params'
-import { roomSelector } from '../../../store/selectors'
+import { useDispatch } from 'react-redux'
+import { setRoomState } from '../../../store/actions/rooms'
 
 const Item = ({ id }: { id: number }) => {
+  const dispatch = useDispatch()
   const { navigate } = useNavigation() as HomesStackNavigation
   const { name, state } = useTypedSelector((state: RootState) => state.rooms[id])
 
@@ -23,6 +23,7 @@ const Item = ({ id }: { id: number }) => {
       trailing={
         <Switch  
           value={state < .95}
+          onValueChange={(value) => dispatch(setRoomState(id, value ? 0 : 1))}
         />
       }
       onPress={() => {
@@ -58,9 +59,9 @@ export default () => {
         keyExtractor={(id) => id}
         renderItem={({ item }) => <Item id={item} />}
         renderSectionHeader={({ section: { title } }) => (
-          <Text style={style.roomTitle}>
+          <Caption style={style.roomTitle}>
             {title}
-          </Text>
+          </Caption>
         )}
       />
     </SafeAreaView>

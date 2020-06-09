@@ -1,9 +1,8 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { useTypedSelector } from '../../../store'
-import { roomSelector } from '../../../store/selectors'
+import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../params';
 import { View } from 'react-native'
-import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../params'
+import * as screens from './screens'
 
 interface Props {
   route: RoomScreenRouteProp
@@ -17,13 +16,11 @@ const Placeholder = () => {
 }
 
 export default ({ route }: Props) => {
-  const room = useTypedSelector(roomSelector(route.params.room))
-
   return (
     <Tab.Navigator backBehavior="none">
-      <Tab.Screen name="State" component={Placeholder} />
-      <Tab.Screen name="Systems" component={Placeholder} />
-      <Tab.Screen name="Settings" component={Placeholder} />
+      <Tab.Screen name="State" component={screens.State} initialParams={route.params} />
+      <Tab.Screen name="Systems" component={Placeholder} initialParams={route.params} />
+      <Tab.Screen name="Settings" component={Placeholder} initialParams={route.params} />
     </Tab.Navigator>
   )
 }
