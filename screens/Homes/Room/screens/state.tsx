@@ -26,7 +26,7 @@ export default ({ route }: Props) => {
   return (
     <View 
       style={{ flex: 1, margin: 16 }}
-      onLayout={(event) => setHeight(event.nativeEvent.layout.height)}
+      onLayout={(event) => setHeight(Math.min(event.nativeEvent.layout.height, 400))}
     >
       {height ? (
         <VerticalSlider
