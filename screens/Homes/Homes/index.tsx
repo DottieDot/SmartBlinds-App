@@ -8,11 +8,12 @@ import { SectionList, SectionListData } from 'react-native'
 import * as model from '../../../store/model'
 import style from './style'
 import { useNavigation } from '@react-navigation/native'
+import { HomesStackNavigation } from '../params'
 
 export default () => {
   const homes = useTypedSelector(state => state.homes)
   const [sections, setSections] = useState<SectionListData<model.Room>[]>([])
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation() as HomesStackNavigation
 
   useEffect(() => {
     setSections(homes.map((dat) => ({

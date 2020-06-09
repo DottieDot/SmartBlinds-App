@@ -1,16 +1,16 @@
 import React from 'react'
 import { createStackNavigator, HeaderTitle, StackHeaderTitleProps } from '@react-navigation/stack'
-
 import Homes from './Homes'
 import Room from './Room'
 import { useTypedSelector } from '../../store'
 import { roomSelector } from '../../store/selectors'
 import { useNavigationState } from '@react-navigation/native'
+import { RoomScreenRouteProp } from './params'
 
 const Stack = createStackNavigator()
 
 const RoomHeader = (props: StackHeaderTitleProps) => {
-  const params = useNavigationState(state => state.routes[state.index].params) as any
+  const params = useNavigationState(state => state.routes[state.index].params) as RoomScreenRouteProp['params']
   const room = useTypedSelector(roomSelector(params?.id, params?.homeId))
 
   return (

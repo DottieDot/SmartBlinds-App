@@ -3,9 +3,11 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { useTypedSelector } from '../../../store'
 import { roomSelector } from '../../../store/selectors'
 import { View } from 'react-native'
+import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../params'
 
 interface Props {
-  route: any
+  route: RoomScreenRouteProp
+  navigation: RoomScreenNavigationProp
 }
 
 const Tab = createMaterialTopTabNavigator()
