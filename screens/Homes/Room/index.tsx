@@ -1,8 +1,8 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../params';
-import { View } from 'react-native'
+import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../params'
 import * as screens from './screens'
+import { RoomContextProvier } from './context'
 
 interface Props {
   route: RoomScreenRouteProp
@@ -11,16 +11,14 @@ interface Props {
 
 const Tab = createMaterialTopTabNavigator()
 
-const Placeholder = () => {
-  return <View></View>
-}
-
 export default ({ route }: Props) => {
   return (
-    <Tab.Navigator backBehavior="none">
-      <Tab.Screen name="State" component={screens.State} initialParams={route.params} />
-      <Tab.Screen name="Systems" component={screens.Systems} initialParams={route.params} />
-      <Tab.Screen name="Settings" component={screens.Settings} initialParams={route.params} />
-    </Tab.Navigator>
+    <RoomContextProvier value={route.params.room}>
+      <Tab.Navigator backBehavior="none">
+        <Tab.Screen name="State" component={screens.State} />
+        <Tab.Screen name="Systems" component={screens.Systems} />
+        <Tab.Screen name="Settings" component={screens.Settings} />
+      </Tab.Navigator>
+    </RoomContextProvier>
   )
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 import { useTypedSelector } from '../../../../store'
-import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../../params'
 import System from '../../../../components/System'
+import { useRoom } from '../context'
 
 const Item = ({ id }: { id: number }) => {
   const system = useTypedSelector(state => state.systems[id])
@@ -12,13 +12,8 @@ const Item = ({ id }: { id: number }) => {
   )
 }
 
-interface Props {
-  route: RoomScreenRouteProp
-  navigation: RoomScreenNavigationProp
-}
-
-export default ({ route }: Props) => {
-  const room = useTypedSelector(state => state.rooms[route.params.room])
+export default () => {
+  const room = useRoom()
 
   return (
     <FlatList

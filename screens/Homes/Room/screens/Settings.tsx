@@ -6,15 +6,11 @@ import { View, StyleSheet } from 'react-native'
 import { TextInput, FAB } from 'react-native-paper'
 import { useDispatch } from 'react-redux'
 import { setRoomName } from '../../../../store/actions/rooms'
+import { useRoom } from '../context'
 
-interface Props {
-  route: RoomScreenRouteProp
-  navigation: RoomScreenNavigationProp
-}
-
-export default ({ route }: Props) => {
+export default () => {
   const dispatch = useDispatch()
-  const room = useTypedSelector(roomSelector(route.params.room))
+  const room = useRoom()
   const [name, setName] = useState(room.name)
 
   return (

@@ -1,23 +1,16 @@
 import React, { useState } from 'react'
-import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../../params'
-import { useTypedSelector } from '../../../../store'
-import { roomSelector } from '../../../../store/selectors'
 import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { setRoomState } from '../../../../store/actions/rooms'
 import { VerticalSlider } from '../../../../components'
 import { useTheme } from 'react-native-paper'
 import Color from 'color'
+import { useRoom } from '../context'
 
-interface Props {
-  route: RoomScreenRouteProp
-  navigation: RoomScreenNavigationProp
-}
-
-export default ({ route }: Props) => {
+export default () => {
   const dispatch = useDispatch()
   const theme = useTheme()
-  const room = useTypedSelector(roomSelector(route.params.room))
+  const room = useRoom()
   const [height, setHeight] = useState(0)
   
   const trackColor = Color(theme.colors.onSurface).mix(Color(theme.colors.surface), .75).toString()
