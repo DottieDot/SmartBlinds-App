@@ -5,12 +5,23 @@ import { Provider as ReduxProvider, useDispatch } from 'react-redux'
 import { Provider as PaperProvider } from 'react-native-paper'
 import store, { useTypedSelector } from './store'
 import * as navigators from './navigators'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme as DefaultRNavigationTheme  } from '@react-navigation/native'
 import OAuth2 from './util/OAuth2'
-import * as api from './api'
 import { SetLoggedIn } from './store/actions/auth'
+import { DefaultTheme as DefaultPaperTheme } from 'react-native-paper'
+import * as api from './api'
 import * as SplashScreen from 'expo-splash-screen'
 import * as screens from './screens'
+
+const CombinedDarkTheme = {
+  ...DefaultRNavigationTheme,
+  ...DefaultPaperTheme,
+  colors: { 
+    ...DefaultRNavigationTheme.colors, 
+    ...DefaultPaperTheme.colors,
+  },
+};
+
 
 const AppRoot = () => {
   const auth = useTypedSelector(state => state.auth)
@@ -48,8 +59,8 @@ const AppRoot = () => {
 export default () => {
   return (
     <ReduxProvider store={store}>
-      <PaperProvider>
-        <NavigationContainer>
+      <PaperProvider theme={CombinedDarkTheme}>
+        <NavigationContainer theme={CombinedDarkTheme}>
           <AppRoot />
         </NavigationContainer>
       </PaperProvider>

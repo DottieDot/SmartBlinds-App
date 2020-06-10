@@ -1,22 +1,23 @@
 import React from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Homes } from '../screens';
+import { Homes } from '../screens'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
-const Tab = createBottomTabNavigator()
+const Tab = createMaterialBottomTabNavigator()
 
+// sceneAnimationEnabled disabled due to a bug
 export default () => (
   <Tab.Navigator
     initialRouteName="homes"
+    shifting={true}
+    sceneAnimationEnabled={false} 
   >
     <Tab.Screen
       name="homes"
       component={Homes}
       options={{
         tabBarLabel: 'Homes',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={size} />
-        )
+        tabBarIcon: "home",
       }}
     />
     <Tab.Screen
@@ -24,9 +25,7 @@ export default () => (
       component={Homes}
       options={{
         tabBarLabel: 'Routines',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={size} />
-        )
+        tabBarIcon: "home",
       }}
     />
     <Tab.Screen
@@ -34,9 +33,7 @@ export default () => (
       component={Homes}
       options={{
         tabBarLabel: 'Settings',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="settings" color={color} size={size} />
-        )
+        tabBarIcon: "settings",
       }}
     />
   </Tab.Navigator>
