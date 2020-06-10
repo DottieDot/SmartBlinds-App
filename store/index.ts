@@ -1,13 +1,14 @@
 import reducers from './reducers'
 import { createStore, applyMiddleware, AnyAction } from 'redux'
 import { TypedUseSelectorHook, useSelector } from 'react-redux'
-import { Auth, Home, Room } from './model'
+import { Auth, Home, Room, System } from './model'
 import thunk, { ThunkDispatch } from 'redux-thunk'
 
 export interface RootState {
-  auth: Auth,
-  homes: { [key: number]: Home }
-  rooms: { [key: number]: Room }
+  auth    :Auth,
+  homes   :{ [key: number]: Home }
+  rooms   :{ [key: number]: Room }
+  systems :{ [key: number]: System }
 }
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector

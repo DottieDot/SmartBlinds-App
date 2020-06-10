@@ -19,7 +19,7 @@ export default ({ route }: Props) => {
   return (
     <Tab.Navigator backBehavior="none">
       <Tab.Screen name="State" component={screens.State} initialParams={route.params} />
-      <Tab.Screen name="Systems" component={Placeholder} initialParams={route.params} />
+      <Tab.Screen name="Systems" component={screens.Systems} initialParams={route.params} />
       <Tab.Screen name="Settings" component={screens.Settings} initialParams={route.params} />
     </Tab.Navigator>
   )
