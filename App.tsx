@@ -6,12 +6,11 @@ import { Provider as PaperProvider } from 'react-native-paper'
 import store, { useTypedSelector } from './store'
 import * as navigators from './navigators'
 import { NavigationContainer } from '@react-navigation/native'
-import OAuth2 from './util/OAuth2';
+import OAuth2 from './util/OAuth2'
 import * as api from './api'
-import { SetLoggedIn } from './store/actions/auth';
-import * as SplashScreen from 'expo-splash-screen';
+import { SetLoggedIn } from './store/actions/auth'
+import * as SplashScreen from 'expo-splash-screen'
 import * as screens from './screens'
-import { loadHomes } from './store/actions/homes';
 
 const AppRoot = () => {
   const auth = useTypedSelector(state => state.auth)
@@ -27,7 +26,6 @@ const AppRoot = () => {
 
         if (user) {
           dispatch(SetLoggedIn(user))
-          dispatch(loadHomes())
         }
       }
       

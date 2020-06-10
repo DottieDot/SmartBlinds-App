@@ -1,6 +1,6 @@
-import IUser from "./User";
+import User from "./User";
 
 export default interface Auth {
-  loggedIn: boolean
-  user: IUser | null
+  loggedIn :boolean
+  user     :User | null
 }

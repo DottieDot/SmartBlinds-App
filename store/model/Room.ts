@@ -1,7 +1,8 @@
 
 export default interface Room {
-  id: number
-  homeId: number
-  name: string
-  state: number
+  id      :number
+  home_id :number
+  name    :string
+  state   :number
+  systems :number[]
 }
