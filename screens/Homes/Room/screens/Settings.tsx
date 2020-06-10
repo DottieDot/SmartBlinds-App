@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../../params'
-import { useTypedSelector } from '../../../../store'
-import { roomSelector } from '../../../../store/selectors'
 import { View, StyleSheet } from 'react-native'
 import { TextInput, FAB } from 'react-native-paper'
 import { useDispatch } from 'react-redux'
