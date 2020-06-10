@@ -1,6 +1,5 @@
 import React from 'react'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Homes } from '../screens'
+import { Homes, Settings } from '../screens'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 const Tab = createMaterialBottomTabNavigator()
@@ -30,7 +29,7 @@ export default () => (
     />
     <Tab.Screen
       name="settings"
-      component={Homes}
+      component={Settings}
       options={{
         tabBarLabel: 'Settings',
         tabBarIcon: "settings",

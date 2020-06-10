@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { setRoomState } from '../../../../store/actions/rooms'
 import { VerticalSlider } from '../../../../components'
-import { useTheme } from 'react-native-paper'
+import { useTheme, overlay } from 'react-native-paper'
 import Color from 'color'
 import { useRoom } from '../context'
 
@@ -13,6 +13,7 @@ export default () => {
   const room = useRoom()
   const [height, setHeight] = useState(0)
   
+  const backgroundColor = theme.dark ? overlay(4, theme.colors.surface) : theme.colors.surface
   const trackColor = Color(theme.colors.onSurface).mix(Color(theme.colors.surface), .75).toString()
   const indicatorColor = Color(theme.colors.onSurface).mix(Color(theme.colors.surface), .5).toString()
 
@@ -30,7 +31,7 @@ export default () => {
           width="100%"
           height={height}
           borderRadius={theme.roundness}
-          minimumTrackTintColor={theme.colors.surface}
+          minimumTrackTintColor={backgroundColor as string}
           maximumTrackTintColor={trackColor}
           showBallIndicator
           ballIndicatorPosition="50%"

@@ -17,6 +17,7 @@ const Tab = createMaterialTopTabNavigator()
 export default ({ route }: Props) => {
   const theme = useTheme()
 
+  // Elevation for getPrimarySurfaceColor is 0 because the component itself does some internal calculations
   return (
     <RoomContextProvier value={route.params.room}>
       <Tab.Navigator 
@@ -27,7 +28,7 @@ export default ({ route }: Props) => {
           },
           activeTintColor: 'white',
           inactiveTintColor: Color('white').alpha(.5).toString(),
-          style: { backgroundColor: getPrimarySurfaceColor(theme, 4) }
+          style: { backgroundColor: getPrimarySurfaceColor(theme, 0) }
         }}
       >
         <Tab.Screen name="State" component={screens.State} />
