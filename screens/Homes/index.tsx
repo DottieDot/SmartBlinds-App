@@ -8,6 +8,7 @@ import { useNavigationState } from '@react-navigation/native'
 import { RoomScreenRouteProp } from './params'
 import { Appbar } from 'react-native-paper'
 import { Header, AppbarHeader } from '../../components'
+import System from '../System'
 
 const Stack = createStackNavigator()
 
@@ -34,7 +35,9 @@ export default () => {
       <Stack.Screen
         name="homes"
         component={Homes}
-        options={{ header: () => null }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name="room"
@@ -44,6 +47,13 @@ export default () => {
             elevation: 0
           },
           header: (props) => <RoomHeader {...props} />
+        }}
+      />
+      <Stack.Screen 
+        name="system"
+        component={System}
+        options={{
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

@@ -8,3 +8,9 @@ export const useIsFirstRouteInParent = () => {
 
   return isFirstRouteInParent
 }
+
+export const useNavigationParams = (): any => {
+  return useNavigationState(
+    state => state.routes[state.index].params
+  )
+}
