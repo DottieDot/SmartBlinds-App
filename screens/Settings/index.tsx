@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Header } from '../../components'
+import Home, { Header as HomeHeader } from '../Home'
 import * as screens from './screens'
 
 const Stack = createStackNavigator()
@@ -25,6 +26,20 @@ export default () => {
         component={screens.AppSettings}
         options={{
           title: 'App Settings'
+        }}
+      />
+      <Stack.Screen
+        name="homes_settings"
+        component={screens.HomeSettings}
+        options={{
+          title: 'Homes'
+        }}
+      />
+      <Stack.Screen
+        name="home"
+        component={Home}
+        options={{
+          header: (props) => <HomeHeader {...props} />
         }}
       />
     </Stack.Navigator>

@@ -1,9 +1,11 @@
 import { Dispatch } from 'redux'
-import { SET_HOMES, ADD_HOME } from '../reducers/homes'
+import { SET_HOMES, ADD_HOME, REMOVE_HOME, SET_HOME_NAME } from '../reducers/homes'
 import { Home } from '../model'
 import * as api from '../../api'
 import { Room } from '../model'
 import { setRooms } from './rooms'
+import { RootState } from '..'
+import { homeSelector } from '../selectors'
 
 export const setHomes = (homes: { [key: number]: Home }) => ({
   type: SET_HOMES,
@@ -26,6 +28,43 @@ export const addHome = (name: string) =>
     }
     else {
 
+    }
+  }
+
+export const removeHome = (home: number) =>
+  async (dispatch: Dispatch, getState: () => RootState) => {
+    const homeData = homeSelector(home)(getState())
+
+    dispatch({
+      type: REMOVE_HOME,
+      home,
+    })
+
+    const result = await api.DeleteHome(home)
+    if (!result) {
+      dispatch({
+        type: ADD_HOME,
+        home: homeData
+      })
+    }
+  }
+
+export const setHomeName = (home: number, name: string) => 
+  async (dispatch: Dispatch, getState: () => RootState) => {
+    const oldName = homeSelector(home)(getState()).name
+
+    dispatch({
+      type: SET_HOME_NAME,
+      home, name,
+    })
+
+    const success = await api.SetHomeName(home, name)
+    if (!success) {
+      dispatch({
+        type: SET_HOME_NAME,
+        name: oldName,
+        home,
+      })
     }
   }
 

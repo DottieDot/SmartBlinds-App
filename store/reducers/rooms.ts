@@ -1,9 +1,9 @@
 import { Room } from '../model'
 
-export const SET_ROOMS = 'SET_ROOMS'
-export const SET_ROOM_STATE = 'SET_ROOM_STATE'
-export const SET_ROOM_NAME = 'SET_ROOM_NAME'
-export const SET_ROOM_SYSTEMS = 'SET_ROOM_SYSTEMS'
+export const SET_ROOMS        = 'ROOMS:SET_ROOMS'
+export const SET_ROOM_STATE   = 'ROOMS:SET_ROOM_STATE'
+export const SET_ROOM_NAME    = 'ROOMS:SET_ROOM_NAME'
+export const SET_ROOM_SYSTEMS = 'ROOMS:SET_ROOM_SYSTEMS'
 
 export default (state: { [key: number]: Room } = {}, action: any) => {
   switch (action.type) {

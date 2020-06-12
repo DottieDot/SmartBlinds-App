@@ -62,7 +62,7 @@ const AppRoot = () => {
         }
       }
 
-      await SplashScreen.hideAsync()
+      setTimeout(() => SplashScreen.hideAsync(), 1000)
     }
     fn()
   }, [])

@@ -9,11 +9,12 @@ import { RoomScreenRouteProp } from './params'
 import { Appbar } from 'react-native-paper'
 import { Header, AppbarHeader } from '../../components'
 import System from '../System'
+import { useNavigationParams } from '../../util/Navigation'
 
 const Stack = createStackNavigator()
 
 const RoomHeader = ({ navigation, scene: { descriptor: { options } } }: StackHeaderProps) => {
-  const params = useNavigationState(state => state.routes[state.index].params) as RoomScreenRouteProp['params']
+  const params = useNavigationParams() as RoomScreenRouteProp['params']
   const room = useTypedSelector(roomSelector(params?.room))
 
   return (

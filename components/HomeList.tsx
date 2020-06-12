@@ -22,15 +22,15 @@ export default ({ homes, style, renderItem }: Props) => {
 
   return (
     <SectionList
-    style={style}
-    sections={sections}
-    keyExtractor={(id) => id}
-    renderItem={renderItem}
-    renderSectionHeader={({ section: { title } }) => (
-      <Caption>
-        {title}
-      </Caption>
-    )}
-  />
+      style={style}
+      sections={sections}
+      keyExtractor={(id) => id}
+      renderItem={renderItem}
+      renderSectionHeader={({ section: { title } }) => (
+        <Caption>
+          {title}
+        </Caption>
+      )}
+    />
   )
 }

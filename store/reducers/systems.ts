@@ -1,7 +1,7 @@
 import { System } from '../model'
 
-export const SET_SYSTEMS     = 'SET_SYSTEMS'
-export const SET_SYSTEM_ROOM = 'SET_SYSTEM_ROOM'
+export const SET_SYSTEMS     = 'SYSTEMS:SET_SYSTEMS'
+export const SET_SYSTEM_ROOM = 'SYSTEMS:SET_SYSTEM_ROOM'
 
 export default (state: { [key: number]: System } = {}, action: any) => {
   switch (action.type) {

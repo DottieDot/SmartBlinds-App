@@ -11,8 +11,8 @@ export const SetLoggedIn = (user: User) => {
       user,
     })
 
-    dispatch(loadHomes())
     dispatch(loadSystems())
+    dispatch(loadHomes())
   }
 }
 
