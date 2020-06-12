@@ -2,7 +2,9 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Header } from '../../components'
 import Home, { Header as HomeHeader } from '../Home'
+import { Header as LicenseHeader } from './screens/License'
 import * as screens from './screens'
+import System from '../System'
 
 const Stack = createStackNavigator()
 
@@ -29,6 +31,34 @@ export default () => {
         }}
       />
       <Stack.Screen
+        name="about"
+        component={screens.About}
+        options={{
+          title: 'About'
+        }}
+      />
+      <Stack.Screen
+        name="tos"
+        component={screens.Tos}
+        options={{
+          title: 'Terms of Service'
+        }}
+      />
+      <Stack.Screen
+        name="licenses"
+        component={screens.Licenses}
+        options={{
+          title: 'Open source licenses'
+        }}
+      />
+      <Stack.Screen
+        name="license"
+        component={screens.License}
+        options={{
+          header: (props) => <LicenseHeader {...props} />
+        }}
+      />
+      <Stack.Screen
         name="homes_settings"
         component={screens.HomeSettings}
         options={{
@@ -40,6 +70,20 @@ export default () => {
         component={Home}
         options={{
           header: (props) => <HomeHeader {...props} />
+        }}
+      />
+      <Stack.Screen
+        name="systems_settings"
+        component={screens.SystemsSettings}
+        options={{
+          title: 'Unlinked Systems'
+        }}
+      />
+      <Stack.Screen
+        name="system"
+        component={System}
+        options={{
+          title: 'Unlinked Systems'
         }}
       />
     </Stack.Navigator>

@@ -28,8 +28,8 @@ const settings = [
         route: 'homes_settings'
       },
       {
-        title: 'Systems',
-        description: 'Manage your systems',
+        title: 'Unlinked systems',
+        description: 'Manage your unlinked systems',
         route: 'systems_settings'
       },
     ]

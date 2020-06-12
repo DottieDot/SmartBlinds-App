@@ -9,7 +9,7 @@ import { useNavigationParams } from '../../../../util/Navigation'
 const Item = ({ id }: { id: number }) => {
   const { name } = useTypedSelector(roomSelector(id))
   const { navigate } = useNavigation()
-  const { returnRoute } = useNavigationParams()
+  const params = useNavigationParams()
 
   return (
     <Room
@@ -17,7 +17,7 @@ const Item = ({ id }: { id: number }) => {
       icon="blank"
       style={style.room}
       onPress={() => {
-        navigate(returnRoute, { room: id  })
+        navigate(params?.returnRoute, { room: id  })
       }}
     />
   )
