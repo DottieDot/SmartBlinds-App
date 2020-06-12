@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux'
-import { SET_HOMES } from '../reducers/homes'
+import { SET_HOMES, ADD_HOME } from '../reducers/homes'
 import { Home } from '../model'
 import * as api from '../../api'
 import { Room } from '../model'
@@ -10,6 +10,24 @@ export const setHomes = (homes: { [key: number]: Home }) => ({
   homes,
 })
 
+export const addHome = (name: string) => 
+  async (dispatch: Dispatch) => {
+    const homeId = await api.AddHome(name)
+
+    if (homeId !== null) {
+      dispatch({
+        type: ADD_HOME,
+        home: {
+          id: homeId,
+          name: name,
+          rooms: [],
+        }
+      })
+    }
+    else {
+
+    }
+  }
 
 export const loadHomes = () => {
   return async (dispatch: Dispatch) => {
@@ -30,7 +48,7 @@ export const loadHomes = () => {
         (home.rooms.forEach(
           (room: any) => (accumulator[room.id] = {
             id      :room.id,
-            home_id  :home.id,
+            home_id :home.id,
             name    :room.name,
             state   :room.state,
             systems :room.systems,
@@ -40,8 +58,8 @@ export const loadHomes = () => {
     )
 
     if (homesReduced && roomsReduced) {
-      dispatch(setHomes(homesReduced))
       dispatch(setRooms(roomsReduced))
+      dispatch(setHomes(homesReduced))
     }
     else {
       // Something went wrong.

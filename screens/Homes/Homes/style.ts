@@ -7,7 +7,7 @@ export default StyleSheet.create({
   room: {
     marginBottom: 8,
   },
-  roomTitle: {
-    
+  fab: {
+    position: 'absolute',
   },
 })

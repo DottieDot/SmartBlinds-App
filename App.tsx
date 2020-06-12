@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 
 import React, { useEffect } from 'react';
 import { Provider as ReduxProvider, useDispatch } from 'react-redux'
-import { Provider as PaperProvider } from 'react-native-paper'
+import { Provider as PaperProvider, Portal } from 'react-native-paper'
 import { store, persistor, useTypedSelector } from './store'
 import * as navigators from './navigators'
 import { NavigationContainer, DefaultTheme as DefaultRNavigationTheme, DarkTheme as RNavigationDarkTheme, useTheme } from '@react-navigation/native'
@@ -68,14 +68,14 @@ const AppRoot = () => {
   }, [])
 
   return (
-    <React.Fragment>
+    <Portal.Host>
       <DarkStatusBar />
       {auth.loggedIn ? (
         <navigators.BottomTabs />
       ) : (
           <screens.Auth />
         )}
-    </React.Fragment>
+    </Portal.Host>
   )
 }
 

@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Room, HomeList } from '../../../components'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useTypedSelector, RootState } from '../../../store'
-import { Switch } from 'react-native-paper'
+import { useTypedSelector } from '../../../store'
+import { Switch, FAB, Portal } from 'react-native-paper'
 import style from './style'
 import { useNavigation } from '@react-navigation/native'
 import { HomesStackNavigation } from '../params'
 import { useDispatch } from 'react-redux'
 import { setRoomState } from '../../../store/actions/rooms'
+import * as Dialogs from './dialogs'
+import { roomSelector } from '../../../store/selectors'
+import { addHome } from '../../../store/actions/homes'
 
 const Item = ({ id }: { id: number }) => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation() as HomesStackNavigation
-  const { name, state } = useTypedSelector((state: RootState) => state.rooms[id])
+  const { name, state } = useTypedSelector(roomSelector(id))
 
   return (
     <Room
@@ -44,14 +47,40 @@ const Item = ({ id }: { id: number }) => {
 
 export default () => {
   const homes = useTypedSelector(state => state.homes)
+  const dispatch = useDispatch()
+  const [fabState, setFabState] = useState(false)
+  const [newHome, setNewHome] = useState(false)
+  const [newRoom, setNewRoom] = useState(false)
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <HomeList
         homes={homes}
         style={style.list}
         renderItem={({ item }) => <Item id={item} />}
       />
+      <FAB.Group
+        visible={true}
+        open={fabState}
+        style={style.fab}
+        icon={fabState ? 'close' : 'plus'}
+        onStateChange={({open}) => setFabState(open)}
+        actions={[
+          { icon: 'home',      label: 'New Home', onPress: () => { setNewHome(true) } },
+          { icon: 'bed-empty', label: 'New Room', onPress: () => { setNewRoom(true) } },
+        ]}
+      />
+      <Portal>
+        <Dialogs.NewHome 
+          visible={newHome}
+          onDismiss={() => setNewHome(false)}
+          onCancel={() => setNewHome(false)}
+          onConfirm={(name) => {
+            dispatch(addHome(name))
+            setNewHome(false)
+          }}
+        />
+      </Portal>
     </SafeAreaView>
   )
 }
