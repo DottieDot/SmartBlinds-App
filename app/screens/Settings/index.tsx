@@ -83,7 +83,7 @@ export default () => {
         name="system"
         component={System}
         options={{
-          title: 'Unlinked Systems'
+          headerShown: false
         }}
       />
     </Stack.Navigator>

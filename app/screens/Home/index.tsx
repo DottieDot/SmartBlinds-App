@@ -58,7 +58,7 @@ export const Header = ({ navigation, scene: { descriptor: { options } } }: Stack
 export default ({ route }: any) => {
   const home = useTypedSelector(homeSelector(route.params.home))
   const dispatch = useDispatch()
-  const [name, setName] = useState(home.name)
+  const [name, setName] = useState(home?.name)
 
   return (
     <ScrollView contentContainerStyle={style.root}>
@@ -71,7 +71,7 @@ export default ({ route }: any) => {
       />
       <FAB
         style={style.fab}
-        visible={name !== home.name && name.length != 0}
+        visible={name !== home?.name && name.length != 0}
         icon="check"
         onPress={() => dispatch(setHomeName(home.id, name))}
       />

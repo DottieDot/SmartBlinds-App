@@ -1,9 +1,9 @@
-import { Dispatch } from 'redux'
-import { SET_HOMES, ADD_HOME, REMOVE_HOME, SET_HOME_NAME } from '../reducers/homes'
+import { Dispatch } from '..'
+import { SET_HOMES, ADD_HOME, REMOVE_HOME, SET_HOME_NAME, CLEAR_ROOM_FROM_HOME } from '../reducers/homes'
 import { Home } from '../model'
 import * as api from '../../api'
 import { Room } from '../model'
-import { setRooms } from './rooms'
+import { setRooms, removeRooms } from './rooms'
 import { RootState } from '..'
 import { homeSelector } from '../selectors'
 
@@ -46,6 +46,12 @@ export const removeHome = (home: number) =>
         type: ADD_HOME,
         home: homeData
       })
+    }
+    else {
+      // More difficult to undo
+      setTimeout(() => {
+        dispatch(removeRooms(homeData.rooms))
+      }, 0)
     }
   }
 

@@ -3,7 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { Headline, Paragraph, Subheading } from 'react-native-paper'
 
 export default () => (
-  <ScrollView>
+  <ScrollView contentContainerStyle={{ padding: 16 }}>
     <Headline>Terms of Service</Headline>
     <Paragraph>Please read these terms of service ("terms", "terms of service") carefully before using [website] website (the "service") operated by SmartBlinds ("us", 'we", "our").</Paragraph>
     <Subheading>Conditions of Use</Subheading>

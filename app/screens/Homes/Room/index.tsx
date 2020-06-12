@@ -7,6 +7,8 @@ import { useTheme } from 'react-native-paper'
 import { getPrimarySurfaceColor } from '../../../util/Colors'
 import Color from 'color'
 
+export { default as Header } from './header'
+
 interface Props {
   route: RoomScreenRouteProp
   navigation: RoomScreenNavigationProp

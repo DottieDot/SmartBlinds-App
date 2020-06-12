@@ -12,7 +12,7 @@ const Item = ({ id }: { id: number }) => {
   
   return (
     <List.Item
-      title={home.name} 
+      title={home?.name} 
       onPress={() => {
         navigate('home', {
           home: id

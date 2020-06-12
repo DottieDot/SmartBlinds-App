@@ -12,8 +12,8 @@ import { useDispatch } from 'react-redux'
 export default ({ route }: { route: any }) => {
   const dispatch = useDispatch()
   const system = useSystem()
-  const room = useTypedSelector(roomSelector(system.room_id))
-  const home = useTypedSelector(homeSelector(room.home_id))
+  const room = useTypedSelector(roomSelector(system.room_id ?? -1))
+  const home = useTypedSelector(homeSelector(room?.home_id ?? -1))
   const { navigate, goBack } = useNavigation()
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default ({ route }: { route: any }) => {
     <ScrollView style={styles.root}>
       <List.Item 
         title="Room"
-        description={`${home.name}: ${room.name}`}
+        description={home ? `${home.name}: ${room.name}` : undefined}
         style={styles.listItem}
         onPress={() => navigate('room_select', { returnRoute: 'system' })}
       />

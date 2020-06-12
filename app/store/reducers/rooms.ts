@@ -4,6 +4,8 @@ export const SET_ROOMS        = 'ROOMS:SET_ROOMS'
 export const SET_ROOM_STATE   = 'ROOMS:SET_ROOM_STATE'
 export const SET_ROOM_NAME    = 'ROOMS:SET_ROOM_NAME'
 export const SET_ROOM_SYSTEMS = 'ROOMS:SET_ROOM_SYSTEMS'
+export const REMOVE_ROOMS     = 'ROOMS:REMOVE_ROOMS'
+export const REMOVE_ROOM      = 'ROOMS:REMOVE_ROOM'
 
 export default (state: { [key: number]: Room } = {}, action: any) => {
   switch (action.type) {
@@ -33,6 +35,22 @@ export default (state: { [key: number]: Room } = {}, action: any) => {
           systems: action.systems,
         }
       }
+    case REMOVE_ROOM:
+      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
+        const key = +_key
+        if (key !== action.room) {
+          accumulator[key] = state[key]
+        }
+        return accumulator
+      }, {})
+    case REMOVE_ROOMS:
+      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
+        const key = +_key
+        if (!action.rooms.includes(key)) {
+          accumulator[key] = state[key]
+        }
+        return accumulator
+      }, {})
     default:
       return state;
   }
