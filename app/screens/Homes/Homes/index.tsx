@@ -7,7 +7,7 @@ import style from './style'
 import { useNavigation } from '@react-navigation/native'
 import { HomesStackNavigation } from '../params'
 import { useDispatch } from 'react-redux'
-import { setRoomState } from '../../../store/actions/rooms'
+import { setRoomState, createRoom } from '../../../store/actions/rooms'
 import * as Dialogs from './dialogs'
 import { roomSelector } from '../../../store/selectors'
 import { addHome } from '../../../store/actions/homes'
@@ -34,12 +34,9 @@ const Item = ({ id }: { id: number }) => {
         />
       }
       onPress={() => {
-        // Make app feel more responsive
-        setTimeout(() => {
-          navigate('room', {
-            room: id,
-          })
-        }, 0)
+        navigate('room', {
+          room: id,
+        })
       }}
     />
   )
@@ -78,6 +75,14 @@ export default () => {
           onConfirm={(name) => {
             dispatch(addHome(name))
             setNewHome(false)
+          }}
+        />
+        <Dialogs.NewRoom 
+          visible={newRoom}
+          onDismiss={() => setNewRoom(false)}
+          onConfirm={(name, home) => {
+            dispatch(createRoom(name, home))
+            setNewRoom(false)
           }}
         />
       </Portal>

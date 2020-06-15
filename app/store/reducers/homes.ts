@@ -1,4 +1,5 @@
 import { Home } from '../model'
+import { ADD_ROOM } from './rooms'
 
 export const SET_HOMES            = 'HOMES:SET_HOMES'
 export const ADD_HOME             = 'HOMES:ADD_HOME'
@@ -36,6 +37,14 @@ export default (state: { [key: number]: Home } = {}, action: any) => {
         [action.home]: {
           ...state[action.home],
           rooms: state[action.home].rooms.filter((id) => id !== action.room)
+        }
+      }
+    case ADD_ROOM:
+      return {
+        ...state,
+        [action.room.home_id]: {
+          ...state[action.room.home_id],
+          rooms: [ ...state[action.room.home_id].rooms, action.room.id ]
         }
       }
     default:

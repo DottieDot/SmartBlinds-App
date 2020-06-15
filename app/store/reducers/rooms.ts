@@ -6,6 +6,7 @@ export const SET_ROOM_NAME    = 'ROOMS:SET_ROOM_NAME'
 export const SET_ROOM_SYSTEMS = 'ROOMS:SET_ROOM_SYSTEMS'
 export const REMOVE_ROOMS     = 'ROOMS:REMOVE_ROOMS'
 export const REMOVE_ROOM      = 'ROOMS:REMOVE_ROOM'
+export const ADD_ROOM         = 'ROOMS:ADD_ROOM'
 
 export default (state: { [key: number]: Room } = {}, action: any) => {
   switch (action.type) {
@@ -51,6 +52,13 @@ export default (state: { [key: number]: Room } = {}, action: any) => {
         }
         return accumulator
       }, {})
+    case ADD_ROOM:
+      return {
+        ...state,
+        [action.room.id]: {
+          ...action.room
+        }
+      }
     default:
       return state;
   }

@@ -5,5 +5,7 @@ export { default as GetSystems  } from './GetSystems'
 export { default as AddHome     } from './AddHome'
 export { default as DeleteHome  } from './DeleteHome'
 export { default as SetHomeName } from './SetHomeName'
+export { default as DeleteRoom  } from './DeleteRoom'
+export { default as CreateRoom  } from './CreateRoom'
 
 export { default as Server } from './Server'
