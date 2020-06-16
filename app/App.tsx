@@ -22,6 +22,8 @@ const combinedLightTheme = {
   colors: {
     ...DefaultRNavigationTheme.colors,
     ...DefaultPaperTheme.colors,
+    primary: '#ff7144',
+    accent: '#ff7144',
   },
 }
 
@@ -31,6 +33,8 @@ const combinedDarkTheme = {
   colors: {
     ...RNavigationDarkTheme.colors,
     ...PaperDarkTheme.colors,
+    primary: '#ff7144',
+    accent: '#ff7144',
   },
 };
 

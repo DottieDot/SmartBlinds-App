@@ -4,7 +4,7 @@ import { RoomScreenRouteProp, RoomScreenNavigationProp } from '../params'
 import * as screens from './screens'
 import { RoomContextProvier } from './context'
 import { useTheme } from 'react-native-paper'
-import { getPrimarySurfaceColor } from '../../../util/Colors'
+import { getPrimarySurfaceColor, getContrastingTextColor } from '../../../util/Colors'
 import Color from 'color'
 
 export { default as Header } from './header'
@@ -19,6 +19,8 @@ const Tab = createMaterialTopTabNavigator()
 export default ({ route }: Props) => {
   const theme = useTheme()
 
+  const foregroundColor = getContrastingTextColor(getPrimarySurfaceColor(theme, 4))
+
   // Elevation for getPrimarySurfaceColor is 0 because the component itself does some internal calculations
   return (
     <RoomContextProvier value={route.params.room}>
@@ -26,10 +28,10 @@ export default ({ route }: Props) => {
         backBehavior="none" 
         tabBarOptions={{
           indicatorStyle: {
-            backgroundColor: 'white',
+            backgroundColor: foregroundColor,
           },
-          activeTintColor: 'white',
-          inactiveTintColor: Color('white').alpha(.5).toString(),
+          activeTintColor: foregroundColor,
+          inactiveTintColor: Color(foregroundColor).alpha(.5).toString(),
           style: { backgroundColor: getPrimarySurfaceColor(theme, 0) }
         }}
       >
