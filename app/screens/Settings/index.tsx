@@ -86,6 +86,13 @@ export default () => {
           headerShown: false
         }}
       />
+      <Stack.Screen
+        name="account_settings"
+        component={screens.AccountSettings}
+        options={{
+          title: 'Account'
+        }}
+      />
     </Stack.Navigator>
   )
 }

@@ -23,11 +23,13 @@
     "expo": "~37.0.3",
     "expo-constants": "~9.0.0",
     "expo-splash-screen": "^0.2.3",
+    "formik": "^2.1.4",
     "moment": "^2.26.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz",
     "react-native-appearance": "~0.3.3",
+    "react-native-formik-paper-inputs": "^1.0.8",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-paper": "^3.10.1",
     "react-native-reanimated": "~1.7.0",
@@ -42,7 +44,8 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

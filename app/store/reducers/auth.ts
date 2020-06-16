@@ -1,7 +1,8 @@
-import { Auth } from "../model"
+import { Auth, User } from "../model"
 
 export const SET_LOGGED_IN  = 'AUTH:SET_LOGGED_IN'
 export const SET_LOGGED_OUT = 'AUTH:SET_LOGGED_OUT'
+export const SET_USER_DETAILS = 'AUTH:SET_USER_DETAILS'
 
 const initialState: Auth = {
   loggedIn: false,
@@ -19,6 +20,15 @@ export default (state = initialState, action: any): Auth => {
       return {
         loggedIn: false,
         user: null,
+      }
+    case SET_USER_DETAILS:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          name: action.name,
+          email: action.email,
+        } as User
       }
     default:
       return state;

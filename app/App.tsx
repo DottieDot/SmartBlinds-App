@@ -15,6 +15,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import * as screens from './screens'
 import { StatusBar } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
+import Color from 'color';
 
 const combinedLightTheme = {
   ...DefaultRNavigationTheme,
@@ -42,7 +43,7 @@ const DarkStatusBar = () => {
   const theme = useTheme()
   return (
     <StatusBar
-      barStyle={theme.dark ? 'light-content' : 'dark-content'}
+      barStyle={(theme.dark) ? 'light-content' : 'dark-content'}
       backgroundColor="transparent"
       translucent
     />
@@ -93,7 +94,6 @@ const ThemeWrapper = () => {
 
   return (
     <PaperProvider theme={theme}>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
       <NavigationContainer theme={theme}>
         <AppRoot />
       </NavigationContainer>
