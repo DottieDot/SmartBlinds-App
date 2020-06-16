@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Home } from '../store/model';
 import { SectionListData, SectionList, StyleProp, ViewStyle, SectionListRenderItem } from 'react-native';
-import { Caption } from 'react-native-paper';
+import { List } from 'react-native-paper';
 
 interface Props {
   homes: { [key: number]: Home }
@@ -27,9 +27,9 @@ export default ({ homes, style, renderItem }: Props) => {
       keyExtractor={(id) => id}
       renderItem={renderItem}
       renderSectionHeader={({ section: { title } }) => (
-        <Caption>
+        <List.Subheader>
           {title}
-        </Caption>
+        </List.Subheader>
       )}
     />
   )
