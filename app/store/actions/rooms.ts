@@ -9,26 +9,52 @@ import * as api from '../../api'
 import { SET_ROOM_FOR_SYSTEMS } from '../reducers/systems'
 import sleep from '../../util/sleep'
 
-// TODO: Send API request
-export const setRoomState = (room: number, state: number) => ({
-  type: SET_ROOM_STATE,
-  room,
-  state,
-})
+export const setRoomState = (room: number, state: number) =>
+  async (dispatch: Dispatch, getState: () => RootState) => {
+    const prevState = roomSelector(room)(getState()).state
 
-// TODO: Send API request
-export const setRoomName = (room: number, name: string) => ({
-  type: SET_ROOM_NAME,
-  room,
-  name,
-})
+    dispatch({
+      type: SET_ROOM_STATE,
+      room,
+      state,
+    })
+
+    const res = await api.SetRoomState(room, state)
+    if (!res) {
+      dispatch({
+        type: SET_ROOM_STATE,
+        room,
+        state: prevState,
+      })
+    }
+  }
+
+export const setRoomName = (room: number, name: string) =>
+  async (dispatch: Dispatch, getState: () => RootState) => {
+    const prevName = roomSelector(room)(getState()).name
+
+    dispatch({
+      type: SET_ROOM_NAME,
+      room,
+      name,
+    })
+
+    const res = await api.SetRoomName(room, name)
+    if (!res) {
+      dispatch({
+        type: SET_ROOM_NAME,
+        room,
+        name: prevName,
+      })
+    }
+  }
 
 export const setRooms = (rooms: { [key: number]: Room }) => ({
   type: SET_ROOMS,
   rooms,
 })
 
-export const removeRooms = (roomIds: number[]) => 
+export const removeRooms = (roomIds: number[]) =>
   (dispatch: Dispatch, getState: () => RootState) => {
     const rooms = getState().rooms
     const systemIds: number[] = []
@@ -46,7 +72,7 @@ export const removeRooms = (roomIds: number[]) =>
     dispatch(clearRoomFromSystems(systemIds))
   }
 
-export const removeRoom = (roomId: number) => 
+export const removeRoom = (roomId: number) =>
   async (dispatch: Dispatch, getState: () => RootState) => {
     const room = roomSelector(roomId)(getState())
 

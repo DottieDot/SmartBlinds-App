@@ -1,5 +1,5 @@
 import React from 'react'
-import { List, RadioButton, useTheme, Dialog } from 'react-native-paper'
+import { List, RadioButton, Dialog } from 'react-native-paper'
 import { FlatList } from 'react-native-gesture-handler'
 import { View } from 'react-native'
 
@@ -13,8 +13,6 @@ export interface PickerProps {
 }
 
 export default ({ visible, options, selectedValue, onValueChange, onDismiss, title }: PickerProps) => {
-  const theme = useTheme()
-
   return (
     <Dialog
       visible={visible}
