@@ -4,6 +4,7 @@ export const SET_SYSTEMS             = 'SYSTEMS:SET_SYSTEMS'
 export const SET_SYSTEM_ROOM         = 'SYSTEMS:SET_SYSTEM_ROOM'
 export const CLEAR_ROOM_FROM_SYSTEMS = 'SYSTEMS:CLEAR_ROOM_FROM_SYSTEMS'
 export const SET_ROOM_FOR_SYSTEMS    = 'SYSTEMS:SET_ROOM_FOR_SYSTEMS'
+export const SET_SYSTEM_NAME         = 'SYSTEMS:SET_SYSTEM_NAME'
 
 export default (state: { [key: number]: System } = {}, action: any) => {
   switch (action.type) {
@@ -35,6 +36,14 @@ export default (state: { [key: number]: System } = {}, action: any) => {
         }
         return accumulator
       }, {})
+    case SET_SYSTEM_NAME:
+      return {
+        ...state,
+        [action.system]: {
+          ...state[action.system],
+          name: action.name,
+        }
+      }
     default:
       return state;
   }

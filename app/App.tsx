@@ -9,13 +9,12 @@ import { NavigationContainer, DefaultTheme as DefaultRNavigationTheme, DarkTheme
 import OAuth2 from './util/OAuth2'
 import { SetLoggedIn } from './store/actions/auth'
 import { DefaultTheme as DefaultPaperTheme, DarkTheme as PaperDarkTheme } from 'react-native-paper'
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance'
 import * as api from './api'
 import * as SplashScreen from 'expo-splash-screen'
 import * as screens from './screens'
-import { StatusBar } from 'react-native';
-import { PersistGate } from 'redux-persist/integration/react';
-import Color from 'color';
+import { StatusBar } from 'react-native'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const combinedLightTheme = {
   ...DefaultRNavigationTheme,

@@ -43,7 +43,7 @@ export default ({ type, name, style, inputStyle, helperTextStyle, ...props }: Pr
   const [field, meta] = name ? useField(name) : []
   
   return (
-    <View>
+    <View style={style}>
       <TextInput
         {...typeProps[type ?? 'default']}
         onChangeText={field?.onChange(name)}
