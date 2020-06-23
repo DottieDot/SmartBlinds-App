@@ -2,7 +2,6 @@ import { System, Room } from '../model'
 import { SET_SYSTEMS, SET_SYSTEM_ROOM, CLEAR_ROOM_FROM_SYSTEMS, SET_SYSTEM_NAME } from '../reducers/systems'
 import { Dispatch } from 'redux'
 import * as api from '../../api'
-import { SET_ROOM_SYSTEMS } from '../reducers/rooms'
 import { RootState } from '..'
 import { systemSelector } from '../selectors'
 
@@ -14,27 +13,25 @@ export const setSystems = (systems: { [key: number]: System }) => ({
 export const setSystemRoom = (systemId: number, roomId: number) => 
   (dispatch: Dispatch, getState: () => RootState) => {
     const state = getState()
-    const system = state.systems[systemId]
+    const system = systemSelector(systemId)(getState())
     const newRoom = state.rooms[roomId]
-    const prevRoom = state.rooms[system.room_id ?? -1]
+    const prevRoom = system?.room_id ? state.rooms[system.room_id] : null
 
     dispatch({
       type   :SET_SYSTEM_ROOM,
       system :systemId,
-      room   :newRoom.id
+      room   :newRoom.id,
+      prevRoom: prevRoom?.id,
     })
-    if (system.room_id !== null) {
+
+    if (false) {
       dispatch({
-        type    :SET_ROOM_SYSTEMS,
-        room    :prevRoom.id,
-        systems :prevRoom.systems.filter(sys => sys !== systemId)
+        type    :SET_SYSTEM_ROOM,
+        system  : systemId,
+        room    : prevRoom?.id,
+        prevRoom: newRoom.id,
       })
     }
-    dispatch({
-      type    :SET_ROOM_SYSTEMS,
-      room    :newRoom.id,
-      systems :[...newRoom.systems, systemId]
-    })
   }
 
 export const clearRoomFromSystems = (systems: number[]) => ({

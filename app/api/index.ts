@@ -11,5 +11,6 @@ export { default as SetRoomName    } from './SetRoomName'
 export { default as SetRoomState   } from './SetRoomState'
 export { default as ChangePassword } from './ChangePassword'
 export { default as ChangeDetails  } from './ChangeDetails'
+export { default as GetRoutines    } from './GetRoutines'
 
 export { default as Server } from './Server'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Homes, Settings } from '../screens'
+import { Homes, Settings, Routines } from '../screens'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 const Tab = createMaterialBottomTabNavigator()
@@ -21,10 +21,10 @@ export default () => (
     />
     <Tab.Screen
       name="routines"
-      component={Homes}
+      component={Routines}
       options={{
         tabBarLabel: 'Routines',
-        tabBarIcon: "home",
+        tabBarIcon: "clock",
       }}
     />
     <Tab.Screen

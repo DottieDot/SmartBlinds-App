@@ -4,6 +4,7 @@ import { loadHomes } from './homes'
 import { Dispatch, RootState } from '..'
 import { loadSystems } from './systems'
 import * as api from '../../api'
+import { loadRoutines } from './routines'
 
 export const SetLoggedIn = (user: User) => {
   return (dispatch: Dispatch) => {
@@ -14,6 +15,7 @@ export const SetLoggedIn = (user: User) => {
 
     dispatch(loadSystems())
     dispatch(loadHomes())
+    dispatch(loadRoutines())
   }
 }
 
