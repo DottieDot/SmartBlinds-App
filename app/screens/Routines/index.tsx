@@ -20,6 +20,10 @@ export default () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="routine"
+        component={screens.Routine}
+      />
     </Stack.Navigator>
   )
 }
