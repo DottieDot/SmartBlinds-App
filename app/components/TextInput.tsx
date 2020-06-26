@@ -37,9 +37,14 @@ interface Props extends Omit<TextInputProps, 'theme'|'style'> {
   style          ?: StyleProp<ViewStyle>
   inputStyle     ?: StyleProp<ViewStyle>
   helperTextStyle?: StyleProp<TextStyle>
+  withHelperText ?: boolean
 }
 
-export default ({ type, name, style, inputStyle, helperTextStyle, ...props }: Props) => {
+const defaults = {
+  withHelperText: true
+}
+
+export default ({ type, name, style, inputStyle, helperTextStyle, withHelperText, ...props }: Props = defaults) => {
   const [field, meta] = name ? useField(name) : []
   
   return (
@@ -53,13 +58,15 @@ export default ({ type, name, style, inputStyle, helperTextStyle, ...props }: Pr
         style={inputStyle}
         {...props}
       />
-      <HelperText 
-        visible={!!meta?.error}
-        type="error"
-        style={helperTextStyle}
-      >
-        {meta?.error}
-      </HelperText>
+      {withHelperText ? (
+        <HelperText 
+          visible={!!meta?.error}
+          type="error"
+          style={helperTextStyle}
+        >
+          {meta?.error}
+        </HelperText>
+      ) : null}
     </View>
   )
 }

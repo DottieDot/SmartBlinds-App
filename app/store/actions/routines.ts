@@ -112,7 +112,7 @@ export const addRoutine = (name: string) =>
         routine: {
           id,
           name,
-          trigger_at: '',
+          trigger_at: '00:00:00',
           days: 0,
           actions: [],
         } as Routine
