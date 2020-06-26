@@ -22,6 +22,8 @@ export const REMOVE_ROUTINE       = 'REMOVE_ROUTINE'
 export const SET_ROUTINE_DAYS     = 'SET_ROUTINE_DAYS'
 export const ADD_ROUTINE          = 'ADD_ROUTINE'
 
+export const ADD_ROUTINE_ACTION   = 'ADD_ROUTINE_ACTION'
+
 export const SET_THEME            = 'SET_THEME'
 
 export const SET_SYSTEMS          = 'SET_SYSTEMS'

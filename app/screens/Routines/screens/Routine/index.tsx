@@ -3,13 +3,14 @@ import { FlatList } from 'react-native-gesture-handler'
 import { useTypedSelector } from '../../../../store'
 import { routineSelector, routineActionSelector, roomSelector } from '../../../../store/selectors'
 import { Room, TextInput, DayPicker } from '../../../../components'
-import { List, Subheading } from 'react-native-paper'
+import { List, Subheading, FAB, Portal } from 'react-native-paper'
 import { View, Keyboard } from 'react-native'
 import style from './style'
 import { useDispatch } from 'react-redux'
-import { setRoutineName, setRoutineTrigger, setRoutineDays } from '../../../../store/actions/routines'
+import { setRoutineName, setRoutineTrigger, setRoutineDays, addRoutineAction } from '../../../../store/actions/routines'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { RoutineScreenRouteProp } from '../../params'
+import { useNavigation } from '@react-navigation/native'
 
 export { default as Header } from './header'
 
@@ -112,14 +113,30 @@ interface Props {
 
 export default ({ route }: Props) => {
   const actions = useTypedSelector(state => routineSelector(route.params.routine)(state)?.actions)
+  const { navigate } = useNavigation()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (route.params.room) {
+      dispatch(addRoutineAction(route.params.routine, route.params.room))
+    }
+  }, [route.params.room])
 
   return (
-    <FlatList
-      data={actions ?? []}
-      keyExtractor={(item) => item.toString()}
-      contentContainerStyle={style.listStyle}
-      ListHeaderComponent={() => <Content routineId={route.params.routine} />}
-      renderItem={({ item }) => <Item actionId={item} />}
-    />
+    <View style={style.root}>
+      <FlatList
+        data={actions ?? []}
+        keyExtractor={(item) => item.toString()}
+        contentContainerStyle={style.listStyle}
+        ListHeaderComponent={() => <Content routineId={route.params.routine} />}
+        renderItem={({ item }) => <Item actionId={item} />}
+      />
+      <FAB
+        style={style.fab}
+        visible={true}
+        icon="plus"
+        onPress={() => navigate('room_select', { returnRoute: 'routine' })}
+      />
+    </View>
   )
 }

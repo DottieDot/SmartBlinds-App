@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux'
 import * as api from '../../api'
 import { Routine, RoutineAction } from '../model'
-import { SET_ROUTINES, SET_ROUTINE_NAME, SET_ROUTINE_TRIGGER, SET_ROUTINE_DAYS, REMOVE_ROUTINE, ADD_ROUTINE } from './names'
+import { SET_ROUTINES, SET_ROUTINE_NAME, SET_ROUTINE_TRIGGER, SET_ROUTINE_DAYS, REMOVE_ROUTINE, ADD_ROUTINE, ADD_ROUTINE_ACTION } from './names'
 import { RootState } from '..'
 import { routineSelector } from '../selectors'
+import { number } from 'yup'
 
 export const loadRoutines = () =>
   async (dispatch: Dispatch) => {
@@ -116,6 +117,22 @@ export const addRoutine = (name: string) =>
           days: 0,
           actions: [],
         } as Routine
+      })
+    }
+  }
+
+export const addRoutineAction = (routine: number, room: number) =>
+  async (dispatch: Dispatch) => {
+    const id = await api.CreateRoutineAction(routine, room)
+    if (id !== null) {
+      dispatch({
+        type: ADD_ROUTINE_ACTION,
+        action: {
+          id,
+          routine_id: routine,
+          room_id: room,
+          state: 0,
+        } as RoutineAction
       })
     }
   }

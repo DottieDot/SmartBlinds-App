@@ -16,4 +16,12 @@ export default StyleSheet.create({
   listStyle: {
     paddingVertical: 16,
   },
+  root: {
+    flex: 1,
+  },
+  fab: {
+    position: 'absolute',
+    right: 16,
+    bottom: 16,
+  },
 })

@@ -5,6 +5,7 @@ type RoutinesStackParamList = {
   routines: undefined
   routine: {
     routine: number
+    room?: number
   }
 }
 

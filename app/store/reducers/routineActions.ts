@@ -1,5 +1,5 @@
 import { RoutineAction } from '../model'
-import { SET_ROUTINES, REMOVE_ROUTINE, REMOVE_ROOM, REMOVE_HOME } from '../actions/names'
+import { SET_ROUTINES, REMOVE_ROUTINE, REMOVE_ROOM, REMOVE_HOME, ADD_ROUTINE_ACTION } from '../actions/names'
 
 export default (state: { [key: number]: RoutineAction } = {}, action: any) => {
   switch (action.type) {
@@ -31,6 +31,11 @@ export default (state: { [key: number]: RoutineAction } = {}, action: any) => {
         }
         return accumulator
       }, {}) 
+    case ADD_ROUTINE_ACTION:
+      return {
+        ...state,
+        [action.action.id]: action.action
+      }
     default:
       return state
   }
