@@ -33,15 +33,19 @@ const Item = ({ actionId }: { actionId: number }) => {
   )
 }
 
-const Content = ({ routine }: { routine: Routine }) => {
+const Content = ({ routineId }: { routineId: number }) => {
+  const routine = useTypedSelector(routineSelector(routineId))
+
   return (
     <View>
       <TextInput
         mode="outlined"
         label="Routine name"
         style={style.textInput}
-        value={name}
-        name="name"
+        value={routine.name}
+        onChangeText={() => {
+          
+        }}
       />
       <TextInput
         mode="outlined"
@@ -59,14 +63,14 @@ interface Props {
 }
 
 export default ({ route }: Props) => {
-  const routine = useTypedSelector(routineSelector(route.params.routine))
+  const actions = useTypedSelector(state => routineSelector(route.params.routine)(state).actions)
 
   return (
     <FlatList
-      data={routine.actions}
+      data={actions}
       keyExtractor={(item) => item.toString()}
       contentContainerStyle={style.listStyle}
-      ListHeaderComponent={() => <Content routine={routine} />}
+      ListHeaderComponent={() => <Content routineId={route.params.routine} />}
       renderItem={({ item }) => <Item actionId={item} />}
     />
   )

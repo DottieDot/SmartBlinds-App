@@ -1,11 +1,5 @@
 import { Home } from '../model'
-import { ADD_ROOM } from './rooms'
-
-export const SET_HOMES            = 'HOMES:SET_HOMES'
-export const ADD_HOME             = 'HOMES:ADD_HOME'
-export const REMOVE_HOME          = 'HOMES:REMOVE_HOME'
-export const SET_HOME_NAME        = 'HOMES:SET_HOME_NAME'
-export const CLEAR_ROOM_FROM_HOME = 'HOMES:CLEAR_ROOM_FROM_HOME'
+import { SET_HOMES, ADD_HOME, REMOVE_HOME, SET_HOME_NAME, ADD_ROOM, REMOVE_ROOM } from '../actions/names'
 
 export default (state: { [key: number]: Home } = {}, action: any) => {
   switch (action.type) {
@@ -31,20 +25,20 @@ export default (state: { [key: number]: Home } = {}, action: any) => {
           name: action.name,
         },
       }
-    case CLEAR_ROOM_FROM_HOME:
-      return {
-        ...state,
-        [action.home]: {
-          ...state[action.home],
-          rooms: state[action.home].rooms.filter((id) => id !== action.room)
-        }
-      }
     case ADD_ROOM:
       return {
         ...state,
         [action.room.home_id]: {
           ...state[action.room.home_id],
           rooms: [ ...state[action.room.home_id].rooms, action.room.id ]
+        }
+      }
+    case REMOVE_ROOM:
+      return {
+        ...state,
+        [action.room.home_id]: {
+          ...state[action.room.home_id],
+          rooms: [ state[action.room.home_id].rooms.filter(v => v !== action.room.id) ]
         }
       }
     default:

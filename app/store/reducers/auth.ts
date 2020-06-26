@@ -1,8 +1,5 @@
 import { Auth, User } from "../model"
-
-export const SET_LOGGED_IN  = 'AUTH:SET_LOGGED_IN'
-export const SET_LOGGED_OUT = 'AUTH:SET_LOGGED_OUT'
-export const SET_USER_DETAILS = 'AUTH:SET_USER_DETAILS'
+import { SET_LOGGED_IN, SET_LOGGED_OUT, SET_USER_DETAILS } from "../actions/names"
 
 const initialState: Auth = {
   loggedIn: false,

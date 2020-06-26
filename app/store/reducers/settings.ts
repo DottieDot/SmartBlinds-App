@@ -1,6 +1,5 @@
 import { Settings } from '../model'
-
-export const SET_THEME = 'SETTINGS:SET_THEME'
+import { SET_THEME } from '../actions/names';
 
 const defaultSettings: Settings = {
   theme: 'system'

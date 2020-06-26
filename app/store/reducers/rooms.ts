@@ -1,12 +1,5 @@
 import { Room } from '../model'
-import { SET_SYSTEM_ROOM } from './systems'
-
-export const SET_ROOMS        = 'ROOMS:SET_ROOMS'
-export const SET_ROOM_STATE   = 'ROOMS:SET_ROOM_STATE'
-export const SET_ROOM_NAME    = 'ROOMS:SET_ROOM_NAME'
-export const REMOVE_ROOMS     = 'ROOMS:REMOVE_ROOMS'
-export const REMOVE_ROOM      = 'ROOMS:REMOVE_ROOM'
-export const ADD_ROOM         = 'ROOMS:ADD_ROOM'
+import { SET_ROOMS, SET_ROOM_NAME, SET_ROOM_STATE, REMOVE_ROOM, ADD_ROOM, SET_SYSTEM_ROOM, REMOVE_HOME } from '../actions/names'
 
 export default (state: { [key: number]: Room } = {}, action: any) => {
   switch (action.type) {
@@ -56,10 +49,10 @@ export default (state: { [key: number]: Room } = {}, action: any) => {
         }
         return accumulator
       }, {})
-    case REMOVE_ROOMS:
+    case REMOVE_HOME:
       return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
         const key = +_key
-        if (!action.rooms.includes(key)) {
+        if (!action.home.rooms.includes(key)) {
           accumulator[key] = state[key]
         }
         return accumulator

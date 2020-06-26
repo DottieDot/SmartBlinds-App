@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import * as api from '../../api'
 import { Routine, RoutineAction } from '../model'
-import { SET_ROUTINES } from '../reducers/routines'
+import { SET_ROUTINES } from './names'
 
 export const loadRoutines = () =>
   async (dispatch: Dispatch) => {

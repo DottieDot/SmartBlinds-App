@@ -1,5 +1,5 @@
 import { User } from '../model'
-import { SET_LOGGED_IN, SET_LOGGED_OUT, SET_USER_DETAILS } from '../reducers/auth'
+import { SET_LOGGED_IN, SET_LOGGED_OUT, SET_USER_DETAILS } from './names'
 import { loadHomes } from './homes'
 import { Dispatch, RootState } from '..'
 import { loadSystems } from './systems'

@@ -1,11 +1,11 @@
 import { Dispatch } from '..'
-import { SET_HOMES, ADD_HOME, REMOVE_HOME, SET_HOME_NAME, CLEAR_ROOM_FROM_HOME } from '../reducers/homes'
 import { Home } from '../model'
 import * as api from '../../api'
 import { Room } from '../model'
-import { setRooms, removeRooms } from './rooms'
+import { setRooms } from './rooms'
 import { RootState } from '..'
 import { homeSelector } from '../selectors'
+import { SET_HOMES, ADD_HOME, REMOVE_HOME, SET_HOME_NAME } from './names'
 
 export const setHomes = (homes: { [key: number]: Home }) => ({
   type: SET_HOMES,
@@ -32,26 +32,13 @@ export const addHome = (name: string) =>
   }
 
 export const removeHome = (home: number) =>
-  async (dispatch: Dispatch, getState: () => RootState) => {
-    const homeData = homeSelector(home)(getState())
-
-    dispatch({
-      type: REMOVE_HOME,
-      home,
-    })
-
+  async (dispatch: Dispatch) => {
     const result = await api.DeleteHome(home)
-    if (!result) {
+    if (result) {
       dispatch({
-        type: ADD_HOME,
-        home: homeData
+        type: REMOVE_HOME,
+        home,
       })
-    }
-    else {
-      // More difficult to undo
-      setTimeout(() => {
-        dispatch(removeRooms(homeData.rooms))
-      }, 0)
     }
   }
 

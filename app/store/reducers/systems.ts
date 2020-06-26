@@ -1,10 +1,5 @@
 import { System } from '../model'
-
-export const SET_SYSTEMS             = 'SYSTEMS:SET_SYSTEMS'
-export const SET_SYSTEM_ROOM         = 'SYSTEMS:SET_SYSTEM_ROOM'
-export const CLEAR_ROOM_FROM_SYSTEMS = 'SYSTEMS:CLEAR_ROOM_FROM_SYSTEMS'
-export const SET_ROOM_FOR_SYSTEMS    = 'SYSTEMS:SET_ROOM_FOR_SYSTEMS'
-export const SET_SYSTEM_NAME         = 'SYSTEMS:SET_SYSTEM_NAME'
+import { SET_SYSTEMS, SET_SYSTEM_ROOM, SET_SYSTEM_NAME, ADD_ROOM, REMOVE_ROOM, REMOVE_HOME } from '../actions/names'
 
 export default (state: { [key: number]: System } = {}, action: any) => {
   switch (action.type) {
@@ -18,24 +13,6 @@ export default (state: { [key: number]: System } = {}, action: any) => {
           room_id: action.room,
         }
       }
-    case CLEAR_ROOM_FROM_SYSTEMS:
-      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
-        const key = +_key
-        accumulator[key] = {
-          ...state[key],
-          room_id: action.systems.includes(key) ? null : state[key].room_id
-        }
-        return accumulator
-      }, {})
-    case SET_ROOM_FOR_SYSTEMS:
-      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
-        const key = +_key
-        accumulator[key] = {
-          ...state[key],
-          room_id: action.systems.includes(key) ? action.room : state[key].room_id
-        }
-        return accumulator
-      }, {})
     case SET_SYSTEM_NAME:
       return {
         ...state,
@@ -44,6 +21,48 @@ export default (state: { [key: number]: System } = {}, action: any) => {
           name: action.name,
         }
       }
+    case ADD_ROOM:
+      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
+        const key = +_key
+        if (action.room.systems.includes(key)) {
+          accumulator[key] = { 
+            ...state[key],
+            room_id: action.room.id
+          }
+        }
+        else {
+          accumulator[key] = state[key]
+        }
+        return accumulator
+      }, {})
+    case REMOVE_ROOM:
+      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
+        const key = +_key
+        if (action.room.systems.includes(key)) {
+          accumulator[key] = { 
+            ...state[key],
+            room_id: null
+          }
+        }
+        else {
+          accumulator[key] = state[key]
+        }
+        return accumulator
+      }, {})
+    case REMOVE_HOME: 
+      return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
+        const key = +_key
+        if (action.home.rooms.includes(state[key].room_id)) {
+          accumulator[key] = { 
+            ...state[key],
+            room_id: null
+          }
+        }
+        else {
+          accumulator[key] = state[key]
+        }
+        return accumulator
+      }, {})
     default:
       return state;
   }

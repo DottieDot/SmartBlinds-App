@@ -1,9 +1,9 @@
 import { System, Room } from '../model'
-import { SET_SYSTEMS, SET_SYSTEM_ROOM, CLEAR_ROOM_FROM_SYSTEMS, SET_SYSTEM_NAME } from '../reducers/systems'
 import { Dispatch } from 'redux'
 import * as api from '../../api'
 import { RootState } from '..'
 import { systemSelector } from '../selectors'
+import { SET_SYSTEMS, SET_SYSTEM_ROOM, SET_SYSTEM_NAME } from './names'
 
 export const setSystems = (systems: { [key: number]: System }) => ({
   type    :SET_SYSTEMS,
@@ -33,11 +33,6 @@ export const setSystemRoom = (systemId: number, roomId: number) =>
       })
     }
   }
-
-export const clearRoomFromSystems = (systems: number[]) => ({
-  type: CLEAR_ROOM_FROM_SYSTEMS,
-  systems: systems,
-})
 
 export const loadSystems = () => {
   return async (dispatch: Dispatch) => {
