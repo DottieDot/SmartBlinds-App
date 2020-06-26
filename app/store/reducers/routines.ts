@@ -1,5 +1,5 @@
 import { Routine } from '../model'
-import { SET_ROUTINES, SET_ROUTINE_NAME, SET_ROUTINE_DAYS, REMOVE_ROUTINE, REMOVE_HOME, REMOVE_ROOM, ADD_ROUTINE } from '../actions/names'
+import { SET_ROUTINES, SET_ROUTINE_NAME, SET_ROUTINE_DAYS, REMOVE_ROUTINE, REMOVE_HOME, REMOVE_ROOM, ADD_ROUTINE, SET_ROUTINE_TRIGGER } from '../actions/names'
 
 export default (state: { [key: number]: Routine } = {}, action: any) => {
   switch (action.type) {
@@ -22,6 +22,14 @@ export default (state: { [key: number]: Routine } = {}, action: any) => {
         [action.routine]: {
           ...state[action.routine],
           days: action.days,
+        }
+      }
+    case SET_ROUTINE_TRIGGER:
+      return {
+        ...state,
+        [action.routine]: {
+          ...state[action.routine],
+          trigger_at: action.triggerAt,
         }
       }
     case REMOVE_ROUTINE:

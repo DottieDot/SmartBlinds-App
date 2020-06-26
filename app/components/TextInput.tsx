@@ -44,7 +44,7 @@ const defaults = {
   withHelperText: true
 }
 
-export default ({ type, name, style, inputStyle, helperTextStyle, withHelperText, ...props }: Props = defaults) => {
+export default ({ type, name, style, inputStyle, helperTextStyle, withHelperText = true, ...props }: Props) => {
   const [field, meta] = name ? useField(name) : []
   
   return (

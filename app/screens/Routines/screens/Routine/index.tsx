@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { FlatList } from 'react-native-gesture-handler'
-import { RoutineScreenRouteProp } from '../../params'
 import { useTypedSelector } from '../../../../store'
 import { routineSelector, routineActionSelector, roomSelector } from '../../../../store/selectors'
 import { Room, TextInput, DayPicker } from '../../../../components'
 import { List, Subheading } from 'react-native-paper'
-import { View } from 'react-native'
+import { View, Keyboard } from 'react-native'
 import style from './style'
 import { useDispatch } from 'react-redux'
 import { setRoutineName, setRoutineTrigger, setRoutineDays } from '../../../../store/actions/routines'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { RoutineScreenRouteProp } from '../../params'
 
 export { default as Header } from './header'
 
@@ -39,13 +40,17 @@ const Content = ({ routineId }: { routineId: number }) => {
   const routine = useTypedSelector(routineSelector(routineId)) ?? {}
   const dispatch = useDispatch()
   const [origName, setOrigName] = useState(routine.name)
-  const [triggetAt, setTriggerAt] = useState(routine.trigger_at)
+  const [datePicker, setDatePicker] = useState(false)
+  const [date, setDate] = useState(new Date())
 
   useEffect(() => {
-    if (routine.trigger_at !== triggetAt) {
-      setTriggerAt(routine.trigger_at)
+    if (routine.trigger_at) {
+      const tmp = new Date()
+      // @ts-ignore
+      date.setHours(...routine.trigger_at.split(':'))
+      setDate(date)
     }
-  }, [routine])
+  }, [routine.trigger_at])
 
   return (
     <View>
@@ -67,17 +72,17 @@ const Content = ({ routineId }: { routineId: number }) => {
           }
         }}
         error={!routine.name}
+        withHelperText={false}
       />
       <TextInput
         mode="outlined"
         label="Time"
         style={style.textInput}
         value={routine.trigger_at}
-        onChangeText={(text) => {
-          setTriggerAt(text)
-        }}
-        onBlur={() => {
-          dispatch(setRoutineTrigger(routine.id, triggetAt))
+        withHelperText={false}
+        onFocus={() => {
+          Keyboard.dismiss()
+          setDatePicker(true)
         }}
       />
       <List.Subheader>Days</List.Subheader>
@@ -86,6 +91,17 @@ const Content = ({ routineId }: { routineId: number }) => {
         onValueChange={(days) => dispatch(setRoutineDays(routine.id, days))}
       />
       <List.Subheader>Rooms</List.Subheader>
+      {datePicker && <DateTimePicker
+        value={date}
+        mode="time"
+        display="default"
+        onChange={(e, date) => {
+          setDatePicker(false)
+          if (e.type === 'set' && date) {
+            dispatch(setRoutineTrigger(routine.id, date.toTimeString().split(' ')[0]))
+          }
+        }}
+      />}
     </View>
   )
 }
