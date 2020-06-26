@@ -12,7 +12,7 @@ export default (state: { [key: number]: Home } = {}, action: any) => {
       }
     case REMOVE_HOME:
       return Object.keys(state).reduce<typeof state>((object, key: string) => {
-        if (key != action.home) {
+        if (key != action.home.id) {
           object[+key] = state[+key]
         }
         return object
@@ -38,7 +38,7 @@ export default (state: { [key: number]: Home } = {}, action: any) => {
         ...state,
         [action.room.home_id]: {
           ...state[action.room.home_id],
-          rooms: [ state[action.room.home_id].rooms.filter(v => v !== action.room.id) ]
+          rooms: state[action.room.home_id].rooms.filter(v => v !== action.room.id)
         }
       }
     default:

@@ -54,16 +54,16 @@ export const removeRoom = (roomId: number) =>
   async (dispatch: Dispatch, getState: () => RootState) => {
     const room = roomSelector(roomId)(getState())
 
-    dispatch({
-      type: REMOVE_ROOM,
-      room: roomId,
-    })
+    const routineActions = Object.values(
+      getState().routineActions
+    ).filter(({ room_id }) => room_id === roomId)
+      .map(({ id }) => id)
 
     const res = await api.DeleteRoom(roomId)
-    if (!res) {
+    if (res) {
       dispatch({
-        type: ADD_ROOM,
-        room
+        type: REMOVE_ROOM,
+        room, routineActions
       })
     }
   }

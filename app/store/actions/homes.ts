@@ -31,13 +31,20 @@ export const addHome = (name: string) =>
     }
   }
 
-export const removeHome = (home: number) =>
-  async (dispatch: Dispatch) => {
-    const result = await api.DeleteHome(home)
+export const removeHome = (homeId: number) =>
+  async (dispatch: Dispatch, getState: () => RootState) => {
+    const home = homeSelector(homeId)(getState())
+
+    const routineActions = Object.values(
+      getState().routineActions
+    ).filter(({ room_id }) => home.rooms.includes(room_id))
+      .map(({ id }) => id)
+
+    const result = await api.DeleteHome(homeId)
     if (result) {
       dispatch({
         type: REMOVE_HOME,
-        home,
+        home, routineActions,
       })
     }
   }

@@ -15,7 +15,7 @@ import { addHome } from '../../../store/actions/homes'
 const Item = ({ id }: { id: number }) => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation() as HomesStackNavigation
-  const { name, state } = useTypedSelector(roomSelector(id))
+  const { name, state } = useTypedSelector(roomSelector(id)) ?? {}
 
   return (
     <Room

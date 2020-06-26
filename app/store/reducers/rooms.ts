@@ -44,7 +44,7 @@ export default (state: { [key: number]: Room } = {}, action: any) => {
     case REMOVE_ROOM:
       return Object.keys(state).reduce<typeof state>((accumulator, _key) => {
         const key = +_key
-        if (key !== action.room) {
+        if (key !== action.room.id) {
           accumulator[key] = state[key]
         }
         return accumulator
