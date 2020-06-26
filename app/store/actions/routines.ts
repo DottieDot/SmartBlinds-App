@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 import * as api from '../../api'
 import { Routine, RoutineAction } from '../model'
-import { SET_ROUTINES, SET_ROUTINE_NAME, SET_ROUTINE_TRIGGER, SET_ROUTINE_DAYS, REMOVE_ROUTINE } from './names'
+import { SET_ROUTINES, SET_ROUTINE_NAME, SET_ROUTINE_TRIGGER, SET_ROUTINE_DAYS, REMOVE_ROUTINE, ADD_ROUTINE } from './names'
 import { RootState } from '..'
 import { routineSelector } from '../selectors'
 
@@ -41,7 +41,14 @@ export const setRoutineName = (routine: number, name: string, commit: boolean, o
     })
     
     if (commit) {
-      // Send API request
+      const res = await api.SetRoutineName(routine, name)
+      if (!res) {
+        dispatch({
+          type: SET_ROUTINE_NAME,
+          routine,
+          name: origName,
+        })
+      }
     }
   }
 
@@ -53,6 +60,15 @@ export const setRoutineTrigger = (routine: number, triggerAt: string) =>
       type: SET_ROUTINE_TRIGGER,
       routine, triggerAt
     })
+    
+    const res = await api.SetRoutineTrigger(routine, triggerAt)
+    if (!res) {
+      dispatch({
+        type: SET_ROUTINE_TRIGGER,
+        routine, 
+        triggetAt: origTrigger,
+      })
+    }
   }
 
 export const setRoutineDays = (routine: number, days: number) =>
@@ -63,14 +79,43 @@ export const setRoutineDays = (routine: number, days: number) =>
       type: SET_ROUTINE_DAYS,
       routine, days,
     })
+
+    const res = await api.SetRoutineDays(routine, days)
+    if (!res) {
+      dispatch({
+        type: SET_ROUTINE_DAYS,
+        routine,
+        days: origDays,
+      })
+    }
   }
 
 export const removeRoutine = (routineId: number) =>
   async (dispatch: Dispatch, getState: () => RootState) => {
     const routine = routineSelector(routineId)(getState())
 
-    dispatch({
-      type: REMOVE_ROUTINE,
-      routine
-    })
+    const res = await api.DeleteRoutine(routineId)
+    if (res) {
+      dispatch({
+        type: REMOVE_ROUTINE,
+        routine
+      })
+    }
+  }
+
+export const addRoutine = (name: string) =>
+  async (dispatch: Dispatch) => {
+    const id = await api.CreateRoutine(name)
+    if (id !== null) {
+      dispatch({
+        type: ADD_ROUTINE,
+        routine: {
+          id,
+          name,
+          trigger_at: '',
+          days: 0,
+          actions: [],
+        } as Routine
+      })
+    }
   }

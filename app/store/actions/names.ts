@@ -20,6 +20,7 @@ export const SET_ROUTINE_NAME     = 'SET_ROUTINE_NAME'
 export const SET_ROUTINE_TRIGGER  = 'SET_ROUTINE_TRIGGER'
 export const REMOVE_ROUTINE       = 'REMOVE_ROUTINE'
 export const SET_ROUTINE_DAYS     = 'SET_ROUTINE_DAYS'
+export const ADD_ROUTINE          = 'ADD_ROUTINE'
 
 export const SET_THEME            = 'SET_THEME'
 
